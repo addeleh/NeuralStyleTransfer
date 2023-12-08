@@ -6,9 +6,9 @@ The TensorFlow Implementation of *A Neural Algorithm of Artistic Style* (Gatys e
 
 Have you ever wondered what the Mona Lisa would look like if painted by Vincent Van Gogh? Or what you would look like if you were painted by Wassily Kandinsky? These are questions that can both be answered by Neural Style Transfer. Neural Style Transfer is a deep learning method for image stylization that was introduced in the 2015 paper, [*A Neural Algorithm of Artistic Style*](https://arxiv.org/pdf/1508.06576.pdf) (Gatys et al.). It takes in a content image and a style image, and generates an output image that looks like the content image illustrated in the style of the style image. See the example below.
 
-| Content Image                                        | Style Image                                             | Output Image                                                    |
-|----------------------|----------------------------|----------------------------|
-| <img src="Source Images/mona lisa.jpg" width="300"/> | <img src="Source Images/starry night.jpg" width="600"/> | <img src="Example Outputs/starry lisa output.png" width="200"/> |
+| Content Image                                        | Style Image                                 | Output Image                                                    |
+|------------------------------------------------------|---------------------------------------------|-----------------------------------------------------------------|
+| <img src="Source Images/mona lisa.jpg" width="300"/> | <img src="Source Images/starry night.jpg"/> | <img src="Example Outputs/starry lisa output.png" width="300"/> |
 
 This kind of image stylization can be used with any content or style images, including photographs, and has many applications in art, film, and social media. Neural Style Transfer was the first algorithm to successfully accomplish this task. Although many algorithms have come after that produce higher quality outputs, Neural Style Transfer is still the simplest and the fastest to implement.
 
