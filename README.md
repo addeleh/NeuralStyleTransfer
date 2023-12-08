@@ -6,7 +6,7 @@ The TensorFlow Implementation of *A Neural Algorithm of Artistic Style* (Gatys e
 
 Have you ever wondered what the Mona Lisa would look like if painted by Vincent Van Gogh? Or what you would look like if you were painted by Wassily Kandinsky? These are questions that can both be answered by Neural Style Transfer. Neural Style Transfer is a deep learning method for image stylization that was introduced in the 2015 paper, [*A Neural Algorithm of Artistic Style*](https://arxiv.org/pdf/1508.06576.pdf) (Gatys et al.). It takes in a content image and a style image, and generates an output image that looks like the content image illustrated in the style of the style image. See the example below.
 
-| Content Image                                        | Style Image                                 | Output Image                                                    |
+| Content Image                                        | Style Image                                             | Output Image                                                    |
 |---------------------|--------------------------|--------------------------|
 | <img src="Source Images/mona lisa.jpg" width="300"/> | <img src="Source Images/starry night.jpg" width="400"/> | <img src="Example Outputs/starry lisa output.png" width="300"/> |
 
@@ -20,6 +20,11 @@ In this blog post, I will explain the theory behind neural style transfer, inclu
 
 ## Network Architecture
 
-Neural Style Transfer uses a pre-trained convolutional neural network (CNN) to identify and extract style and content features. In the TensorFlow Core implementation, they use the VGG19 model which is a 19-layer CNN that was trained to perform 1000-class image classification on the ImageNet dataset. VGG19 has 16 convolutional layers and 3 fully-connected layers; Neural Style Transfer only needs the convolutional layers.
+Neural Style Transfer uses a pre-trained convolutional neural network (CNN) to identify and extract style and content features. The TensorFlow Core implementation uses VGG19, which is a 19-layer CNN that was trained to perform 1000-class image classification on the ImageNet dataset. VGG19 has 16 convolutional layers and 3 fully-connected layers. For feature extraction, neural style transfer focuses on the convolutional layers.
 
-Using a CNN that was trained on such a large dataset is critical to the quality of feature extraction. Intuitively, since the network is trained on a large number and variety of images, it is more likely to have learned something about the low-level and high-level features of those images and is more likely to be able to identify similar features in other images.
+```         
+vgg = tf.keras.applications.VGG19(include_top=False, weights='imagenet')
+vgg.trainable = False
+```
+
+Using a CNN that was trained on such a large dataset is critical to the quality of feature extraction. Since the network is trained on a large number and variety of images, it is more likely to have learned something about the low-level and high-level features of those images and is more likely to be able to identify similar features in other images.
