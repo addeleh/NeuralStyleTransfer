@@ -6,9 +6,11 @@ Using The TensorFlow Implementation of *A Neural Algorithm of Artistic Style* (G
 
 Have you ever wondered what the Mona Lisa would look like if painted by Vincent Van Gogh? Or what you would look like if you were painted by Wassily Kandinsky? These are questions that can both be answered by Neural Style Transfer. Neural Style Transfer is a deep learning method for image stylization that was introduced in the 2015 paper, [*A Neural Algorithm of Artistic Style*](https://arxiv.org/pdf/1508.06576.pdf) (Gatys et al.). It takes in a content image and a style image, and generates an output image that looks like the content image illustrated in the style of the style image. See the example below.
 
++------------------------------------------------------+---------------------------------------------------------+-----------------------------------------------------------------+
 | Content Image                                        | Style Image                                             | Output Image                                                    |
-|------------------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------------|
++======================================================+=========================================================+=================================================================+
 | <img src="Source Images/mona lisa.jpg" width="300"/> | <img src="Source Images/starry night.jpg" width="400"/> | <img src="Example Outputs/starry lisa output.png" width="300"/> |
++------------------------------------------------------+---------------------------------------------------------+-----------------------------------------------------------------+
 
 This kind of image stylization can be used with any content or style images, including photographs, and has many applications in art, film, and social media. Neural Style Transfer was the first algorithm to successfully accomplish this task. Although many algorithms have come after that produce higher quality outputs, Neural Style Transfer is still the simplest and the fastest to implement.
 
@@ -20,7 +22,9 @@ In this blog post, I will explain the theory behind neural style transfer, inclu
 
 ## Network Architecture: Pre-trained CNN
 
-<img src="Supplemental Images/VGG19 CNN.png" width="500"/>
+|                                                            |
+|------------------------------------------------------------|
+| <img src="Supplemental Images/VGG19 CNN.png" width="500"/> |
 
 Neural Style Transfer uses a pre-trained convolutional neural network (CNN) to identify and extract style and content features from the style and content images. The TensorFlow Core implementation uses VGG19, which is a 19-layer CNN that was trained to perform 1000-class image classification on the ImageNet dataset. VGG19 has 16 convolutional layers and 3 fully-connected layers. For neural style transfer, we only care about the convolutional layers and can ignore the three fully connected years.
 
@@ -35,11 +39,9 @@ Using a CNN that was trained on such a large dataset is critical to the quality 
 
 Once we have a pre-trained CNN, we need to identify which convolutional layers can represent the style and content of an image. In general, earlier convolutions are typically able to identify low level features like textures and edges, which are more closely related to the style of an image, and the later convolutions are typically able to identify more high level features like objects, faces, hands, which are more typically related to the content of an image. For Neural Style Transfer, this means that we can typically choose layers that appear later in the network to represent content, and layers that appear earlier in the network to represent style.
 
-<p style="text-align:center;">
-
-<img src="Supplemental Images/VGG19 style and content.png" width="500"/>
-
-</p>
+|                                                                          |
+|--------------------------------------------------------------------------|
+| <img src="Supplemental Images/VGG19 style and content.png" width="500"/> |
 
 In the Tensorflow implementation, they chose five layers to represent style and one layer to represent content. These layers are highlighted in the figure above. As you can see, they chose one of the last layers to be the content layer, and they chose style layers throughout to pick up both low level and high level style features. Later, we will see why it's important to have multiple style layers from throughout the network.
 
