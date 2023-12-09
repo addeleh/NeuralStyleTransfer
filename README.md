@@ -69,7 +69,7 @@ Mathematically, we do the same thing as we did for content loss where we transfo
 
 ## Total Loss and "Training"
 
-Total loss is a weighted sum of the style loss and the content loss: $Loss =\alpha*\mathcal{L}_{s}+\beta*\mathcal{L}_{c}$.
+Total loss is a weighted sum of the style loss and the content loss: $Loss =\alpha*\mathcal{L}_s+\beta*\mathcal{L}_c$.
 
 This is minimized during each so-called training step. Note that there is no model being trained. Instead, you could say that it's the output image that is being trained, since its pixel values change to minimize this loss. In the TensorFlow implementation, the output image is initialized to the content image. Then, training is run to impose the style on the output image. We can see how style is gradually imposed on the output image in the figure below.
 
